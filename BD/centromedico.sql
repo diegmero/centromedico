@@ -9,7 +9,7 @@ CREATE TABLE `citas` (
   `citPaciente` varchar(50) NOT NULL,
   `citMedico` varchar(50) NOT NULL,
   `citEspecialidad` varchar(50) NOT NULL,
-  `citConsultorio` int(11) NOT NULL,
+  `citConsultorio` varchar(25) NOT NULL,
   `citestado` enum('Asignado','atendido') COLLATE utf8_spanish_ci NOT NULL,
   `citobservaciones` text COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idcita`),

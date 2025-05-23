@@ -9,6 +9,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	$cithora = $_POST['cithora'];
 	$citPaciente =  $_POST['citPaciente'];
 	$citMedico =  $_POST['citMedico'];
+	$citEspecialidad = $_POST['citEspecialidad'];
 	$citConsultorio =  $_POST['citConsultorio'];
 	$citestado =  $_POST['citestado'];
 	$citobservaciones =  $_POST['citobservaciones'];
@@ -27,22 +28,26 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	}
 	if($mensaje==''){
 		$statement = $conexion->prepare(
-			'INSERT INTO citas values(null, :citfecha,:cithora,:citPaciente,:citMedico,:citConsultorio,:citestado,:citobservaciones)');
+			'INSERT INTO citas 
+			(citfecha, cithora, citPaciente, citMedico, citEspecialidad, citConsultorio, citestado, citobservaciones)
+			VALUES
+			(:citfecha, :cithora, :citPaciente, :citMedico, :citEspecialidad, :citConsultorio, :citestado, :citobservaciones)'
+		);
 
-		$statement ->execute(array(
-			':citfecha'=>$citfecha,
-			':cithora'=>$cithora,
-			':citPaciente'=>$citPaciente,
-			':citMedico'=>$citMedico,
-			':citConsultorio'=>$citConsultorio,
-			':citestado'=>$citestado,
-			':citobservaciones'=>$citobservaciones
+		$statement->execute(array(
+			':citfecha'         => $citfecha,
+			':cithora'          => $cithora,
+			':citPaciente'      => $citPaciente,
+			':citMedico'        => $citMedico,
+			':citEspecialidad'  => $citEspecialidad,
+			':citConsultorio'   => $citConsultorio,
+			':citestado'        => $citestado,
+			':citobservaciones' => $citobservaciones
 		));
-
-		#print_r($statement->errorInfo());exit;
 
 		header('Location: citas.php');
 	}
+
 }
 require 'vista/agregarcitas_vista.php';
 ?>

@@ -12,6 +12,16 @@ $medicos ->execute();
 $medicos = $medicos ->fetchAll();
 if(!$medicos)
 	$mensaje .= 'No hay medicos, por favor registre primero! <br />';
+
+//SELECT PARA ESPECIALIDADES
+$especialidades = $conexion -> prepare("SELECT * FROM especialidades");
+
+$especialidades ->execute();
+$especialidades = $especialidades ->fetchAll();
+if(!$especialidades)
+	$mensaje .= 'No hay especialidades, por favor registre primero! <br />';
+
+
 //SELECT PARA CONSULTORIOS
 $consultorios = $conexion -> prepare("SELECT * FROM consultorios");
 
@@ -52,6 +62,13 @@ if(!$pacientes)
                         <select name="citMedico" class="mayusculas" required> 
 	                        <?php foreach ($medicos as $Sql): ?>
 							<?php echo "<option value='". $Sql['mednombres']. "'>". $Sql['mednombres']." ". $Sql['medapellidos']. "</option>"; ?>
+							<?php endforeach; ?>
+                        </select>
+						</select>
+                        <label>Especialidad:</label>
+                        <select name="citEspecialidad" class="mayusculas" required> 
+	                        <?php foreach ($especialidades as $especialidad): ?>
+							<?php echo "<option value='". $especialidad['espNombre']. "'>". $especialidad['espNombre']."</option>"; ?>
 							<?php endforeach; ?>
                         </select>
                         <label>Consultorios:</label>
